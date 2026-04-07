@@ -1,0 +1,256 @@
+/* ============================================================
+   style_slike.css - Stilovi za galeriju slika
+   Uključuje CSS-only lightbox implementaciju
+   
+   PROMIJENJENE ZNAČAJKE (u odnosu na predložak):
+   1. border-radius povećan s 10px na 14px za sve slike u galeriji
+   2. Dodan hover overlay s natpisom figcaptiona (vidljiv overlay tekst na hover)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+body {
+	font-family: 'Abel', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-weight: 100;
+	font-size: 40px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* ============================================================
+   GALERIJA - flexbox raspored
+   ============================================================ */
+.img-gallery-magnific {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	justify-content: center;
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
+/* Figure element koji drži sliku */
+.magnific-img {
+	width: 30%;
+	min-width: 220px;
+	position: relative;
+	overflow: hidden;
+	/* PROMJENA 1: border-radius povećan s 10px na 14px */
+	border-radius: 14px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.magnific-img:hover {
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+	transform: translateY(-4px);
+}
+
+.magnific-img img {
+	width: 100%;
+	height: auto;
+	display: block;
+	/* PROMJENA 1 (nastavak): border-radius slike prati parent */
+	border-radius: 14px;
+	transition: transform 0.4s ease, filter 0.3s ease;
+	object-fit: cover;
+}
+
+/* Hover efekt - blago zumiranje slike */
+.magnific-img:hover img {
+	transform: scale(1.08);
+	filter: brightness(0.7); /* Potamniti sliku na hover za overlay */
+}
+
+/* 
+   PROMJENA 2: Hover overlay s natpisom figcaptiona
+   Figcaption postaje vidljiv overlay tekst prelaskom miša
+   Koristi CSS transition bez JavaScripta
+*/
+.magnific-img figcaption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+	color: white;
+	text-align: center;
+	padding: 20px 10px 10px;
+	font-size: 0.95rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+	/* Inicijalno skriven - transformacija prema dolje */
+	transform: translateY(100%);
+	transition: transform 0.3s ease;
+	border-radius: 0 0 14px 14px;
+}
+
+/* Prikaži figcaption na hover */
+.magnific-img:hover figcaption {
+	transform: translateY(0);
+}
+
+/* Link unutar figure */
+.magnific-img a {
+	display: block;
+	cursor: zoom-in;
+	text-decoration: none;
+}
+
+/* ============================================================
+   LIGHTBOX - CSS only implementacija bez JavaScripta
+   
+   Mehanizam: 
+   - Svaka slika ima link s href="#lightbox-N"
+   - :target pseudo-klasa hvata kad je hash u URL-u
+   - Overlay postaje vidljiv samo kad je :target aktivan
+   - Link "zatvori" (href="#") uklanja target i skriva overlay
+   ============================================================ */
+
+/* Overlay - inicijalno nevidljiv */
+.lightbox {
+	display: none; /* Skriven bez :target */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.92);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 15px;
+	padding: 20px;
+	box-sizing: border-box;
+	/* Animacija fade-in */
+	animation: lightboxFadeIn 0.3s ease forwards;
+}
+
+/* Prikaži lightbox kad je element :target */
+.lightbox:target {
+	display: flex;
+}
+
+/* Animacija lightboxa */
+@keyframes lightboxFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Slika unutar lightboxa */
+.lightbox img {
+	max-width: 90%;
+	max-height: 80vh;
+	border-radius: 8px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+	object-fit: contain;
+	animation: lightboxZoomIn 0.3s ease forwards;
+}
+
+@keyframes lightboxZoomIn {
+	from {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* Naslov slike unutar lightboxa */
+.lightbox-naslov {
+	color: white;
+	font-size: 1.1rem;
+	text-align: center;
+	margin: 0;
+	letter-spacing: 1px;
+}
+
+/* Gumb za zatvaranje lightboxa */
+.lightbox-zatvori {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: white;
+	font-size: 2.5rem;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	transition: color 0.2s ease, transform 0.2s ease;
+	z-index: 1001;
+}
+
+.lightbox-zatvori:hover {
+	color: #e94560;
+	transform: scale(1.2) rotate(90deg);
+}
+
+/* ============================================================
+   GALERIJA NASLOV I OPIS
+   ============================================================ */
+.galerija h1 {
+	color: darkblue;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.galerija-opis {
+	text-align: center;
+	color: #666;
+	font-size: 1rem;
+	margin-bottom: 10px;
+}
+
+/* ============================================================
+   RESPONZIVNOST
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 900px) {
+	.magnific-img {
+		width: 45%;
+		min-width: 180px;
+	}
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+	.magnific-img {
+		width: 100%;
+		min-width: unset;
+	}
+
+	.galerija h1 {
+		font-size: 1.5rem;
+	}
+
+	.lightbox img {
+		max-width: 95%;
+		max-height: 70vh;
+	}
+
+	.lightbox-zatvori {
+		top: 10px;
+		right: 15px;
+		font-size: 2rem;
+	}
+}

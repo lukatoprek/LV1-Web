@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- SEO meta tag: opis stranice za pretraživače -->
+	<meta name="description" content="Web stranica o glazbi - popis popularnih pjesama s izvođačima, žanrovima i godinama izdanja.">
+	<!-- SEO meta tag: ključne riječi za pretraživače -->
+	<meta name="keywords" content="glazba, pjesme, izvođači, žanrovi, rock, metal, jazz, pop">
+	<link rel="stylesheet" href="style/style.css">
+	<title>Glazba - Popis Pjesama</title>
+</head>
+<body>
+
+	<header role="banner">
+		<h1>Glazba</h1>
+	</header>
+
+	<!-- Navigacija sa ARIA atributima za pristupačnost -->
+	<nav aria-label="Primarna navigacija" role="navigation">
+		<!-- Checkbox hack za skrivanje/prikazivanje navigacije bez JavaScripta -->
+		<input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-hidden="true">
+		<label for="nav-toggle" class="nav-toggle-btn" aria-label="Otvori navigacijski izbornik">&#9776; Menu</label>
+		<ul class="nav-menu" role="list">
+			<li role="listitem"><a href="index.html" aria-current="page">Početna</a></li>
+			<li role="listitem"><a href="slike.html">Slike</a></li>
+			<li role="listitem"><a href="grafikon.html">Grafikon</a></li>
+		</ul>
+	</nav>
+
+	<main role="main" class="main-layout">
+
+		<!-- Glavna sekcija s tablicom -->
+		<section class="content" aria-labelledby="tablica-naslov">
+			<h1 id="tablica-naslov">Popis Pjesama</h1>
+
+			<!-- Tablica s glazbenim podacima -->
+			<div class="table-wrapper">
+				<table aria-label="Tablica s popisom glazbenih pjesama">
+					<thead>
+						<tr>
+							<th scope="col">Pjesma</th>
+							<th scope="col">Izvođač</th>
+							<th scope="col">Žanr</th>
+							<th scope="col">Godina</th>
+							<th scope="col">Trajanje (ms)</th>
+							<th scope="col">Država</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><td>Wonderwall</td><td>Oasis</td><td>Britpop-rock</td><td>2006</td><td>258613</td><td>UK</td></tr>
+						<tr><td>Rainmaker</td><td>Iron Maiden</td><td>Heavy Metal</td><td>2003</td><td>228600</td><td>UK</td></tr>
+						<tr><td>Collapsing New People</td><td>Fad Gadget</td><td>Rock</td><td>1984</td><td>262960</td><td>UK</td></tr>
+						<tr><td>Golden Train</td><td>Justin Nozuka</td><td>Pop</td><td>2008</td><td>182773</td><td>Canada</td></tr>
+						<tr><td>Alastika</td><td>Moving Mountains</td><td>Post-rock</td><td>2007</td><td>317323</td><td>USA</td></tr>
+						<tr><td>The Sky Is Falling</td><td>Thrice</td><td>Post-hardcore</td><td>2008</td><td>261466</td><td>USA</td></tr>
+						<tr><td>Rothko Chapel 5</td><td>Morton Feldman</td><td>Contemporary Classical</td><td>1991</td><td>172866</td><td>USA</td></tr>
+						<tr><td>Call Me Lightning</td><td>The Who</td><td>Rock</td><td>2002</td><td>139893</td><td>UK</td></tr>
+						<tr><td>Dust Cloud</td><td>Bear in Heaven</td><td>Indie Rock</td><td>2009</td><td>357933</td><td>USA</td></tr>
+						<tr><td>Everybody Needs Love</td><td>Slim Smith</td><td>Rock</td><td>2013</td><td>141960</td><td>Jamaica</td></tr>
+						<tr><td>Real Story</td><td>Alborosie</td><td>Reggae</td><td>2010</td><td>198146</td><td>Italy</td></tr>
+						<tr><td>Makes No Difference</td><td>Sum 41</td><td>Rock</td><td>2000</td><td>190426</td><td>Canada</td></tr>
+						<tr><td>Keravnos Kivernitos</td><td>Rotting Christ</td><td>Black Metal</td><td>2007</td><td>281973</td><td>Greece</td></tr>
+						<tr><td>Why Georgia</td><td>John Mayer</td><td>Pop Rock</td><td>2001</td><td>268973</td><td>USA</td></tr>
+						<tr><td>Here With Me</td><td>ATB</td><td>Trance</td><td>2004</td><td>312413</td><td>Germany</td></tr>
+						<tr><td>The Hole in Me</td><td>Blackfield</td><td>Rock</td><td>2004</td><td>167466</td><td>UK/Israel</td></tr>
+						<tr><td>You Fucking Love It</td><td>Dirty Pretty Things</td><td>Rock</td><td>2006</td><td>113866</td><td>UK</td></tr>
+						<tr><td>Black Hearts Now Reign</td><td>Unearth</td><td>Metalcore</td><td>2008</td><td>320173</td><td>USA</td></tr>
+						<tr><td>Georgia On My Mind</td><td>Oscar Peterson</td><td>Jazz</td><td>2012</td><td>223425</td><td>Canada</td></tr>
+						<tr><td>Lone</td><td>Chelsea Wolfe</td><td>Jazz</td><td>2013</td><td>156868</td><td>USA</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- Aside: galerija slika na desnoj strani (desktop), ispod tablice (mobile) -->
+		<aside aria-label="Galerija slika" class="aside-gallery" role="complementary">
+			<h2>Galerija slika</h2>
+
+			<!-- Slika za desktop rezoluciju -->
+			<picture>
+				<source 
+					media="(min-width: 768px)" 
+					srcset="https://unsplash.it/400/300?random=20"
+					width="400" height="300">
+				<!-- Slika za mobilnu rezoluciju -->
+				<img 
+					src="https://unsplash.it/600/200?random=21" 
+					alt="Glazbeni instrument - fotografija vezana uz glazbu"
+					width="600" height="200"
+					loading="lazy"
+					class="aside-img">
+			</picture>
+
+			<picture>
+				<source 
+					media="(min-width: 768px)" 
+					srcset="https://unsplash.it/400/300?random=22"
+					width="400" height="300">
+				<img 
+					src="https://unsplash.it/600/200?random=23" 
+					alt="Koncert - fotografija glazbenog nastupa"
+					width="600" height="200"
+					loading="lazy"
+					class="aside-img">
+			</picture>
+
+			<!-- Stilizirani gumb/link bez JavaScripta -->
+			<a href="slike.html" class="gallery-btn" role="button" aria-label="Pogledaj sve slike u galeriji">
+				Pogledaj sve slike &#8594;
+			</a>
+		</aside>
+
+	</main>
+
+	<!-- Sekcija s opisom -->
+	<section class="content info-section" aria-labelledby="info-naslov" role="region">
+		<h2 id="info-naslov">O stranici</h2>
+		<p>HTML5 omogućava semantičku strukturu koja poboljšava pristupačnost i SEO. Ova stranica prikazuje popis glazbenih pjesama iz raznih žanrova.</p>
+	</section>
+
+	<!-- Article s vijestima -->
+	<article class="content" aria-labelledby="vijesti-naslov" role="article">
+		<h2 id="vijesti-naslov">Zanimljivosti o glazbi</h2>
+		<p>Glazba je jedna od najstarijih umjetnosti. Istraživanja pokazuju da slušanje glazbe pozitivno utječe na raspoloženje, produktivnost i kreativnost.</p>
+	</article>
+
+	<footer role="contentinfo">
+		<p>&copy; 2025. Web Programiranje. Sva prava pridržana.</p>
+	</footer>
+
+</body>
+</html>

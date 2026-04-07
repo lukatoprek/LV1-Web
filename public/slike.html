@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Galerija slika na temu glazbe - prikaz fotografija uz lightbox efekt">
+	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="style/style_slike.css">
+	<title>Glazba - Galerija slika</title>
+</head>
+<body>
+
+	<header role="banner">
+		<h1>Glazba</h1>
+	</header>
+
+	<!-- Navigacija sa ARIA atributima za pristupačnost -->
+	<nav aria-label="Primarna navigacija" role="navigation">
+		<input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-hidden="true">
+		<label for="nav-toggle" class="nav-toggle-btn" aria-label="Otvori navigacijski izbornik">&#9776; Menu</label>
+		<ul class="nav-menu" role="list">
+			<li role="listitem"><a href="index.html">Početna</a></li>
+			<li role="listitem"><a href="slike.html" aria-current="page">Slike</a></li>
+			<li role="listitem"><a href="grafikon.html">Grafikon</a></li>
+		</ul>
+	</nav>
+
+	<!-- Glavna sekcija s galerijom -->
+	<main role="main">
+		<section class="galerija" aria-labelledby="galerija-naslov" role="region">
+			<h1 id="galerija-naslov">Galerija slika</h1>
+			<p class="galerija-opis">Kliknite na sliku za prikaz u punoj veličini.</p>
+
+			<!-- 
+				CSS-only Lightbox implementacija:
+				Svaka slika ima:
+				1. <a> s href="#lightbox-N" koji otvara overlay
+				2. Overlay div s id="lightbox-N" koji se prikazuje kad je :target aktivan
+				3. <a href="#"> za zatvaranje (close) - bez JavaScripta
+				
+				Promijenjene značajke u odnosu na predložak style_slike.css:
+				1. Dodan hover efekt s overlay tekstom (figcaption vidljiv na hover)
+				2. Dodan border-radius povećan na 12px umjesto 10px
+			-->
+
+			<div class="img-gallery-magnific" role="list" aria-label="Galerija fotografija">
+
+				<!-- Slika 1 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-1" aria-label="Otvori sliku 1 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=1"
+							 alt="Glazbena fotografija 1 - nasumična slika"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 1</figcaption>
+				</figure>
+
+				<!-- Lightbox overlay za sliku 1 -->
+				<div id="lightbox-1" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 1 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=1" alt="Glazbena fotografija 1 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 1</p>
+				</div>
+
+				<!-- Slika 2 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-2" aria-label="Otvori sliku 2 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=2"
+							 alt="Glazbena fotografija 2"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 2</figcaption>
+				</figure>
+				<div id="lightbox-2" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 2 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=2" alt="Glazbena fotografija 2 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 2</p>
+				</div>
+
+				<!-- Slika 3 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-3" aria-label="Otvori sliku 3 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=3"
+							 alt="Glazbena fotografija 3"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 3</figcaption>
+				</figure>
+				<div id="lightbox-3" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 3 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=3" alt="Glazbena fotografija 3 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 3</p>
+				</div>
+
+				<!-- Slika 4 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-4" aria-label="Otvori sliku 4 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=4"
+							 alt="Glazbena fotografija 4"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 4</figcaption>
+				</figure>
+				<div id="lightbox-4" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 4 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=4" alt="Glazbena fotografija 4 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 4</p>
+				</div>
+
+				<!-- Slika 5 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-5" aria-label="Otvori sliku 5 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=5"
+							 alt="Glazbena fotografija 5"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 5</figcaption>
+				</figure>
+				<div id="lightbox-5" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 5 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=5" alt="Glazbena fotografija 5 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 5</p>
+				</div>
+
+				<!-- Slika 6 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-6" aria-label="Otvori sliku 6 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=6"
+							 alt="Glazbena fotografija 6"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 6</figcaption>
+				</figure>
+				<div id="lightbox-6" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 6 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=6" alt="Glazbena fotografija 6 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 6</p>
+				</div>
+
+				<!-- Slika 7 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-7" aria-label="Otvori sliku 7 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=7"
+							 alt="Glazbena fotografija 7"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 7</figcaption>
+				</figure>
+				<div id="lightbox-7" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 7 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=7" alt="Glazbena fotografija 7 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 7</p>
+				</div>
+
+				<!-- Slika 8 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-8" aria-label="Otvori sliku 8 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=8"
+							 alt="Glazbena fotografija 8"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 8</figcaption>
+				</figure>
+				<div id="lightbox-8" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 8 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=8" alt="Glazbena fotografija 8 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 8</p>
+				</div>
+
+				<!-- Slika 9 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-9" aria-label="Otvori sliku 9 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=9"
+							 alt="Glazbena fotografija 9"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 9</figcaption>
+				</figure>
+				<div id="lightbox-9" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 9 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=9" alt="Glazbena fotografija 9 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 9</p>
+				</div>
+
+				<!-- Slika 10 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-10" aria-label="Otvori sliku 10 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=10"
+							 alt="Glazbena fotografija 10"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 10</figcaption>
+				</figure>
+				<div id="lightbox-10" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 10 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=10" alt="Glazbena fotografija 10 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 10</p>
+				</div>
+
+				<!-- Slika 11 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-11" aria-label="Otvori sliku 11 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=11"
+							 alt="Glazbena fotografija 11"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 11</figcaption>
+				</figure>
+				<div id="lightbox-11" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 11 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=11" alt="Glazbena fotografija 11 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 11</p>
+				</div>
+
+				<!-- Slika 12 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-12" aria-label="Otvori sliku 12 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=12"
+							 alt="Glazbena fotografija 12"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 12</figcaption>
+				</figure>
+				<div id="lightbox-12" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 12 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=12" alt="Glazbena fotografija 12 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 12</p>
+				</div>
+
+				<!-- Slika 13 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-13" aria-label="Otvori sliku 13 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=13"
+							 alt="Glazbena fotografija 13"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 13</figcaption>
+				</figure>
+				<div id="lightbox-13" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 13 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=13" alt="Glazbena fotografija 13 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 13</p>
+				</div>
+
+				<!-- Slika 14 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-14" aria-label="Otvori sliku 14 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=14"
+							 alt="Glazbena fotografija 14"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 14</figcaption>
+				</figure>
+				<div id="lightbox-14" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 14 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=14" alt="Glazbena fotografija 14 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 14</p>
+				</div>
+
+				<!-- Slika 15 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-15" aria-label="Otvori sliku 15 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=15"
+							 alt="Glazbena fotografija 15"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 15</figcaption>
+				</figure>
+				<div id="lightbox-15" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 15 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=15" alt="Glazbena fotografija 15 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 15</p>
+				</div>
+
+				<!-- Slika 16 -->
+				<figure class="galerija_slika magnific-img" role="listitem">
+					<a href="#lightbox-16" aria-label="Otvori sliku 16 u punoj veličini">
+						<img src="https://unsplash.it/300/200?random=16"
+							 alt="Glazbena fotografija 16"
+							 loading="lazy"
+							 width="300" height="200">
+					</a>
+					<figcaption>Slika 16</figcaption>
+				</figure>
+				<div id="lightbox-16" class="lightbox" role="dialog" aria-modal="true" aria-label="Slika 16 u punoj veličini">
+					<a href="#" class="lightbox-zatvori" aria-label="Zatvori prikaz slike">&times;</a>
+					<img src="https://unsplash.it/900/600?random=16" alt="Glazbena fotografija 16 - puna veličina" loading="lazy">
+					<p class="lightbox-naslov">Slika 16</p>
+				</div>
+
+			</div>
+			<!-- Kraj .img-gallery-magnific -->
+
+		</section>
+	</main>
+
+	<footer role="contentinfo">
+		<p>&copy; 2025. Web Programiranje. Sva prava pridržana.</p>
+	</footer>
+
+</body>
+</html>
