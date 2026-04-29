@@ -8,6 +8,7 @@
 	<!-- SEO meta tag: ključne riječi za pretraživače -->
 	<meta name="keywords" content="glazba, pjesme, izvođači, žanrovi, rock, metal, jazz, pop">
 	<link rel="stylesheet" href="style/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 	<title>Glazba - Popis Pjesama</title>
 </head>
 <body>
@@ -34,40 +35,91 @@
 		<section class="content" aria-labelledby="tablica-naslov">
 			<h1 id="tablica-naslov">Popis Pjesama</h1>
 
-			<!-- Tablica s glazbenim podacima -->
+				<!-- Zadatak 2: Sekcija za filtriranje -->
+			<div class="filteri-wrapper" aria-label="Filtriranje pjesama" role="search">
+				<div class="filteri-naslov">
+					<span class="filteri-ikona">&#9878;</span>
+					<h2>Filtriraj pjesme</h2>
+					<button id="reset-btn" class="reset-btn" aria-label="Resetiraj sve filtere" title="Resetiraj filtere">&#10006; Resetiraj</button>
+				</div>
+
+				<div class="filteri-redak">
+
+					<!-- Filter 1: Žanr - padajući izbornik (select) -->
+					<div class="filter-grupa">
+						<label for="filter-zanr" class="filter-label">
+							<span class="filter-ikona">&#127925;</span> Žanr
+						</label>
+						<select id="filter-zanr" class="filter-select" aria-label="Filtriraj po žanru">
+							<option value="">Svi žanrovi</option>
+							<!-- Dinamički popunjeno iz podataka -->
+						</select>
+					</div>
+
+					<!-- Filter 2: BPM - number input s korakom -->
+					<div class="filter-grupa">
+						<label class="filter-label">
+							<span class="filter-ikona">&#9835;</span> Tempo (BPM)
+						</label>
+						<div class="bpm-inputs">
+							<input type="number" id="filter-bpm-min" class="filter-number" placeholder="Min BPM" min="0" max="300" step="1" aria-label="Minimalni BPM">
+							<span class="bpm-separator">—</span>
+							<input type="number" id="filter-bpm-max" class="filter-number" placeholder="Max BPM" min="0" max="300" step="1" aria-label="Maksimalni BPM">
+						</div>
+					</div>
+
+					<!-- Filter 3: Godina - range slider (dual) -->
+					<div class="filter-grupa filter-godina-grupa">
+						<label class="filter-label">
+							<span class="filter-ikona">&#128197;</span> Godina:
+							<span class="godina-prikaz"><span id="godina-od-val">—</span> — <span id="godina-do-val">—</span></span>
+						</label>
+						<div class="range-wrapper">
+							<input type="range" id="filter-godina-od" class="filter-range range-od" min="1950" max="2025" value="1950" step="1" aria-label="Godina od">
+							<input type="range" id="filter-godina-do" class="filter-range range-do" min="1950" max="2025" value="2025" step="1" aria-label="Godina do">
+							<div class="range-track">
+								<div class="range-fill" id="range-fill"></div>
+							</div>
+						</div>
+						<div class="range-labele" aria-hidden="true">
+							<span>1950.</span>
+							<span>2025.</span>
+						</div>
+					</div>
+
+					<!-- Filter 4: Raspoloženje - checkbox tagovi -->
+					<div class="filter-grupa filter-raspolozenje-grupa">
+						<label class="filter-label">
+							<span class="filter-ikona">&#128149;</span> Raspoloženje
+						</label>
+						<div id="raspolozenje-tagovi" class="raspolozenje-tagovi" role="group" aria-label="Odaberi raspoloženje">
+							<!-- Dinamički popunjeno -->
+						</div>
+					</div>
+
+				</div>
+
+				<div class="filteri-status">
+					<span id="rezultati-broj" class="rezultati-broj">—</span>
+				</div>
+			</div>
+
+			<!-- Tablica s glazbenim podacima - dinamički popunjena iz glazba.csv -->
 			<div class="table-wrapper">
-				<table aria-label="Tablica s popisom glazbenih pjesama">
+				<table id="glazba-tablica" aria-label="Tablica s popisom glazbenih pjesama">
 					<thead>
 						<tr>
 							<th scope="col">Pjesma</th>
 							<th scope="col">Izvođač</th>
 							<th scope="col">Žanr</th>
 							<th scope="col">Godina</th>
-							<th scope="col">Trajanje (ms)</th>
-							<th scope="col">Država</th>
+							<th scope="col">BPM</th>
+							<th scope="col">Raspoloženje</th>
+							<th scope="col" aria-label="Dodaj u playlistu"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr><td>Wonderwall</td><td>Oasis</td><td>Britpop-rock</td><td>2006</td><td>258613</td><td>UK</td></tr>
-						<tr><td>Rainmaker</td><td>Iron Maiden</td><td>Heavy Metal</td><td>2003</td><td>228600</td><td>UK</td></tr>
-						<tr><td>Collapsing New People</td><td>Fad Gadget</td><td>Rock</td><td>1984</td><td>262960</td><td>UK</td></tr>
-						<tr><td>Golden Train</td><td>Justin Nozuka</td><td>Pop</td><td>2008</td><td>182773</td><td>Canada</td></tr>
-						<tr><td>Alastika</td><td>Moving Mountains</td><td>Post-rock</td><td>2007</td><td>317323</td><td>USA</td></tr>
-						<tr><td>The Sky Is Falling</td><td>Thrice</td><td>Post-hardcore</td><td>2008</td><td>261466</td><td>USA</td></tr>
-						<tr><td>Rothko Chapel 5</td><td>Morton Feldman</td><td>Contemporary Classical</td><td>1991</td><td>172866</td><td>USA</td></tr>
-						<tr><td>Call Me Lightning</td><td>The Who</td><td>Rock</td><td>2002</td><td>139893</td><td>UK</td></tr>
-						<tr><td>Dust Cloud</td><td>Bear in Heaven</td><td>Indie Rock</td><td>2009</td><td>357933</td><td>USA</td></tr>
-						<tr><td>Everybody Needs Love</td><td>Slim Smith</td><td>Rock</td><td>2013</td><td>141960</td><td>Jamaica</td></tr>
-						<tr><td>Real Story</td><td>Alborosie</td><td>Reggae</td><td>2010</td><td>198146</td><td>Italy</td></tr>
-						<tr><td>Makes No Difference</td><td>Sum 41</td><td>Rock</td><td>2000</td><td>190426</td><td>Canada</td></tr>
-						<tr><td>Keravnos Kivernitos</td><td>Rotting Christ</td><td>Black Metal</td><td>2007</td><td>281973</td><td>Greece</td></tr>
-						<tr><td>Why Georgia</td><td>John Mayer</td><td>Pop Rock</td><td>2001</td><td>268973</td><td>USA</td></tr>
-						<tr><td>Here With Me</td><td>ATB</td><td>Trance</td><td>2004</td><td>312413</td><td>Germany</td></tr>
-						<tr><td>The Hole in Me</td><td>Blackfield</td><td>Rock</td><td>2004</td><td>167466</td><td>UK/Israel</td></tr>
-						<tr><td>You Fucking Love It</td><td>Dirty Pretty Things</td><td>Rock</td><td>2006</td><td>113866</td><td>UK</td></tr>
-						<tr><td>Black Hearts Now Reign</td><td>Unearth</td><td>Metalcore</td><td>2008</td><td>320173</td><td>USA</td></tr>
-						<tr><td>Georgia On My Mind</td><td>Oscar Peterson</td><td>Jazz</td><td>2012</td><td>223425</td><td>Canada</td></tr>
-						<tr><td>Lone</td><td>Chelsea Wolfe</td><td>Jazz</td><td>2013</td><td>156868</td><td>USA</td></tr>
+						<!-- Dinamički popunjeno pomoću JavaScripta iz glazba.csv -->
 					</tbody>
 				</table>
 			</div>
@@ -113,6 +165,32 @@
 
 	</main>
 
+	<!-- Zadatak 3: Playlista -->
+	<section class="content playlist-sekcija info-section" id="playlista-sekcija" aria-labelledby="playlist-naslov" role="region">
+		<div class="playlist-header">
+			<h2 id="playlist-naslov">&#9835; Moja playlista <span id="playlist-broj" class="playlist-broj-badge"></span></h2>
+			<button id="potvrdi-playlistu" class="potvrdi-btn" disabled>Potvrdi playlistu</button>
+		</div>
+		<div id="playlist-poruka" class="playlist-poruka" style="display:none;"></div>
+
+		<div id="playlist-prazan" class="playlist-prazan">
+			<p>Dodaj pjesme iz tablice iznad kako bi izgradio svoju playlistu.</p>
+		</div>
+
+		<table id="playlist-tablica" class="playlist-tablica" aria-label="Playlista" style="display:none;">
+			<thead>
+				<tr>
+					<th scope="col">Pjesma</th>
+					<th scope="col">Izvođač</th>
+					<th scope="col">Žanr</th>
+					<th scope="col">Godina</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</section>
+
 	<!-- Sekcija s opisom -->
 	<section class="content info-section" aria-labelledby="info-naslov" role="region">
 		<h2 id="info-naslov">O stranici</h2>
@@ -129,5 +207,284 @@
 		<p>&copy; 2025. Web Programiranje. Sva prava pridržana.</p>
 	</footer>
 
+	<script>
+		// ============================================================
+		// Zadatak 1 & 2: Dohvat, prikaz i filtriranje podataka iz glazba.csv
+		// ============================================================
+
+		let svePjesme = []; // Globalna varijabla za sve pjesme
+		let odabranaRaspolozenja = new Set(); // Praćenje odabranih checkboxova
+
+		fetch('glazba.csv')
+			.then(res => res.text())
+			.then(csv => {
+				const rezultat = Papa.parse(csv, {
+					header: true,
+					skipEmptyLines: true
+				});
+
+				// Fleksibilno pronalaženje ključeva bez obzira na encoding zaglavlja
+				const uzorak = rezultat.data[0] || {};
+				const kljucevi = Object.keys(uzorak);
+				const nadjiKljuc = (...trazeni) =>
+					kljucevi.find(k => trazeni.some(t => k.toLowerCase().includes(t.toLowerCase()))) || '';
+
+				const kZanr = nadjiKljuc('anr', 'genre');
+				const kRaspolozenje = nadjiKljuc('raspolo', 'mood');
+
+				svePjesme = rezultat.data.map(p => ({
+					naslov:       p['Naslov'] || '',
+					autor:        p['Autor'] || '',
+					zanr:         p[kZanr] || '',
+					godina:       Number(p['Godina']),
+					bpm:          Number(p['BPM']),
+					raspolozenje: p[kRaspolozenje] || ''
+				}));
+
+				inicijalizirajFiltre(svePjesme);
+				prikaziTablicu(svePjesme);
+				azurirajBrojRezultata(svePjesme.length, svePjesme.length);
+			})
+			.catch(err => {
+				console.error('Greška pri dohvaćanju CSV-a:', err);
+				const tbody = document.querySelector('#glazba-tablica tbody');
+				tbody.innerHTML = '<tr><td colspan="6" class="nema-rezultata">Greška pri učitavanju podataka.</td></tr>';
+			});
+
+		// ── Inicijalizacija filtara ──────────────────────────────────
+		function inicijalizirajFiltre(pjesme) {
+			// 1. Žanr select - prikupi unique žanrove
+			const zanrovi = [...new Set(pjesme.map(p => p.zanr).filter(Boolean))].sort();
+			const selectZanr = document.getElementById('filter-zanr');
+			zanrovi.forEach(z => {
+				const opt = document.createElement('option');
+				opt.value = z;
+				opt.textContent = z;
+				selectZanr.appendChild(opt);
+			});
+
+			// 2. Raspoloženje checkboxovi - unique raspoloženja
+			const raspolozenja = [...new Set(pjesme.map(p => p.raspolozenje).filter(Boolean))].sort();
+			const kontejner = document.getElementById('raspolozenje-tagovi');
+			raspolozenja.forEach(r => {
+				const label = document.createElement('label');
+				label.className = 'raspolozenje-tag';
+				label.innerHTML = `<input type="checkbox" value="${r}" aria-label="Raspoloženje: ${r}"><span>${r}</span>`;
+				label.querySelector('input').addEventListener('change', function() {
+					if (this.checked) odabranaRaspolozenja.add(r);
+					else odabranaRaspolozenja.delete(r);
+					label.classList.toggle('aktivan', this.checked);
+					filtriraj();
+				});
+				kontejner.appendChild(label);
+			});
+
+			// 3. Godina range - postavi min/max iz podataka
+			const godine = pjesme.map(p => p.godina).filter(g => g > 0);
+			const minGodina = Math.min(...godine);
+			const maxGodina = Math.max(...godine);
+
+			const rangeOd = document.getElementById('filter-godina-od');
+			const rangeDo = document.getElementById('filter-godina-do');
+			rangeOd.min = minGodina; rangeOd.max = maxGodina; rangeOd.value = minGodina;
+			rangeDo.min = minGodina; rangeDo.max = maxGodina; rangeDo.value = maxGodina;
+
+			document.getElementById('godina-od-val').textContent = minGodina + '.';
+			document.getElementById('godina-do-val').textContent = maxGodina + '.';
+			azurirajRangeFill();
+
+			rangeOd.addEventListener('input', () => {
+				if (Number(rangeOd.value) > Number(rangeDo.value)) rangeOd.value = rangeDo.value;
+				document.getElementById('godina-od-val').textContent = rangeOd.value + '.';
+				azurirajRangeFill();
+				filtriraj();
+			});
+			rangeDo.addEventListener('input', () => {
+				if (Number(rangeDo.value) < Number(rangeOd.value)) rangeDo.value = rangeOd.value;
+				document.getElementById('godina-do-val').textContent = rangeDo.value + '.';
+				azurirajRangeFill();
+				filtriraj();
+			});
+
+			// 4. BPM number inputs - event listeners
+			document.getElementById('filter-bpm-min').addEventListener('input', filtriraj);
+			document.getElementById('filter-bpm-max').addEventListener('input', filtriraj);
+
+			// 5. Žanr select - event listener
+			selectZanr.addEventListener('change', filtriraj);
+
+			// 6. Reset gumb
+			document.getElementById('reset-btn').addEventListener('click', resetirajFiltre);
+		}
+
+		// ── Vizualni fill za range slider ────────────────────────────
+		function azurirajRangeFill() {
+			const rangeOd = document.getElementById('filter-godina-od');
+			const rangeDo = document.getElementById('filter-godina-do');
+			const fill = document.getElementById('range-fill');
+			const min = Number(rangeOd.min);
+			const max = Number(rangeOd.max);
+			const od = Number(rangeOd.value);
+			const doo = Number(rangeDo.value);
+			const posOd = ((od - min) / (max - min)) * 100;
+			const posDo = ((doo - min) / (max - min)) * 100;
+			fill.style.left = posOd + '%';
+			fill.style.width = (posDo - posOd) + '%';
+		}
+
+		// ── Glavna funkcija filtriranja ───────────────────────────────
+		function filtriraj() {
+			const odabraniZanr   = document.getElementById('filter-zanr').value;
+			const bpmMin         = Number(document.getElementById('filter-bpm-min').value) || 0;
+			const bpmMax         = Number(document.getElementById('filter-bpm-max').value) || Infinity;
+			const godinaOd       = Number(document.getElementById('filter-godina-od').value);
+			const godinaDo       = Number(document.getElementById('filter-godina-do').value);
+
+			const filtrirane = svePjesme.filter(p => {
+				const zanrOk       = !odabraniZanr || p.zanr === odabraniZanr;
+				const bpmOk        = p.bpm >= bpmMin && p.bpm <= bpmMax;
+				const godinaOk     = p.godina >= godinaOd && p.godina <= godinaDo;
+				const raspolOk     = odabranaRaspolozenja.size === 0 || odabranaRaspolozenja.has(p.raspolozenje);
+				return zanrOk && bpmOk && godinaOk && raspolOk;
+			});
+
+			prikaziTablicu(filtrirane);
+			azurirajBrojRezultata(filtrirane.length, svePjesme.length);
+		}
+
+		// ── Prikaz tablice ───────────────────────────────────────────
+		function prikaziTablicu(pjesme) {
+			const tbody = document.querySelector('#glazba-tablica tbody');
+			tbody.innerHTML = '';
+
+			if (pjesme.length === 0) {
+				tbody.innerHTML = '<tr><td colspan="7" class="nema-rezultata">&#128265; Nema pjesama koje odgovaraju odabranim filterima.</td></tr>';
+				return;
+			}
+
+			for (const p of pjesme) {
+				const uPlaylisti = playlista.some(x => x.naslov === p.naslov && x.autor === p.autor);
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${p.naslov}</td>
+					<td>${p.autor}</td>
+					<td>${p.zanr}</td>
+					<td>${p.godina}</td>
+					<td>${p.bpm}</td>
+					<td>${p.raspolozenje}</td>
+					<td><button class="dodaj-btn${uPlaylisti ? ' dodano' : ''}" ${uPlaylisti ? 'disabled aria-disabled="true"' : ''} aria-label="Dodaj ${p.naslov} u playlistu">${uPlaylisti ? '&#10003; Dodano' : '+ Dodaj'}</button></td>
+				`;
+				if (!uPlaylisti) {
+					row.querySelector('.dodaj-btn').addEventListener('click', () => dodajUPlaylistu(p));
+				}
+				tbody.appendChild(row);
+			}
+		}
+
+		// ── Ažuriranje broja rezultata ───────────────────────────────
+		function azurirajBrojRezultata(prikazano, ukupno) {
+			const el = document.getElementById('rezultati-broj');
+			if (prikazano === ukupno) {
+				el.textContent = `Prikazano ${ukupno} pjesama`;
+				el.className = 'rezultati-broj';
+			} else {
+				el.textContent = `${prikazano} od ${ukupno} pjesama`;
+				el.className = 'rezultati-broj filtrirano';
+			}
+		}
+
+		// ── Reset svih filtera ───────────────────────────────────────
+		function resetirajFiltre() {
+			document.getElementById('filter-zanr').value = '';
+			document.getElementById('filter-bpm-min').value = '';
+			document.getElementById('filter-bpm-max').value = '';
+
+			// Reset rangea na min/max
+			const rangeOd = document.getElementById('filter-godina-od');
+			const rangeDo = document.getElementById('filter-godina-do');
+			rangeOd.value = rangeOd.min;
+			rangeDo.value = rangeDo.max;
+			document.getElementById('godina-od-val').textContent = rangeOd.min + '.';
+			document.getElementById('godina-do-val').textContent = rangeDo.max + '.';
+			azurirajRangeFill();
+
+			// Reset checkbox tagova
+			odabranaRaspolozenja.clear();
+			document.querySelectorAll('.raspolozenje-tag input').forEach(cb => {
+				cb.checked = false;
+				cb.closest('.raspolozenje-tag').classList.remove('aktivan');
+			});
+
+			prikaziTablicu(svePjesme);
+			azurirajBrojRezultata(svePjesme.length, svePjesme.length);
+		}
+
+		// ============================================================
+		// Zadatak 3: Playlista
+		// ============================================================
+
+		let playlista = []; // JavaScript niz za pohranu playliste
+
+		function dodajUPlaylistu(pjesma) {
+			playlista.push(pjesma);
+			osvjeziPlaylistu();
+			// Osvježi tablicu da se gumb zasivi
+			filtriraj();
+		}
+
+		function ukloniIzPlayliste(index) {
+			playlista.splice(index, 1);
+			osvjeziPlaylistu();
+			// Osvježi tablicu da se gumb ponovo aktivira
+			filtriraj();
+		}
+
+		function osvjeziPlaylistu() {
+			const prazan = document.getElementById('playlist-prazan');
+			const tablica = document.getElementById('playlist-tablica');
+			const tbody = tablica.querySelector('tbody');
+			const broja = document.getElementById('playlist-broj');
+			const potvrdiBtn = document.getElementById('potvrdi-playlistu');
+
+			broja.textContent = playlista.length > 0 ? playlista.length : '';
+			potvrdiBtn.disabled = playlista.length === 0;
+
+			if (playlista.length === 0) {
+				prazan.style.display = '';
+				tablica.style.display = 'none';
+				return;
+			}
+
+			prazan.style.display = 'none';
+			tablica.style.display = '';
+			tbody.innerHTML = '';
+
+			playlista.forEach((p, i) => {
+				const row = document.createElement('tr');
+				row.innerHTML = `
+					<td>${p.naslov}</td>
+					<td>${p.autor}</td>
+					<td>${p.zanr}</td>
+					<td>${p.godina}</td>
+					<td><button class="ukloni-btn" aria-label="Ukloni ${p.naslov} iz playliste">&#10006; Ukloni</button></td>
+				`;
+				row.querySelector('.ukloni-btn').addEventListener('click', () => ukloniIzPlayliste(i));
+				tbody.appendChild(row);
+			});
+		}
+
+		document.getElementById('potvrdi-playlistu').addEventListener('click', () => {
+			const poruka = document.getElementById('playlist-poruka');
+			const broj = playlista.length;
+			playlista = [];
+			osvjeziPlaylistu();
+			filtriraj();
+
+			// Prikaži poruku na stranici umjesto alerta
+			poruka.textContent = `✓ Playlista s ${broj} ${broj === 1 ? 'pjesmom' : 'pjesama'} je uspješno spremljena!`;
+			poruka.style.display = 'block';
+			setTimeout(() => { poruka.style.display = 'none'; }, 4000);
+		});
+	</script>
 </body>
 </html>
