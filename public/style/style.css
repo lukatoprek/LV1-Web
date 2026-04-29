@@ -509,3 +509,510 @@ header {
 		font-size: 0.85rem;
 	}
 }
+
+/* ============================================================
+   FILTERI - Zadatak 2
+   ============================================================ */
+
+.filteri-wrapper {
+	background: var(--boja-bijela);
+	border-radius: var(--border-radius);
+	box-shadow: var(--sjena);
+	padding: 22px 26px 14px;
+	margin-bottom: 22px;
+	border-top: 4px solid var(--boja-akcent);
+	animation: fadeInUp 0.6s ease 0.15s both;
+}
+
+.filteri-naslov {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 18px;
+}
+
+.filteri-naslov h2 {
+	font-family: var(--font-naslov);
+	color: var(--boja-primarna);
+	font-size: 1.1rem;
+	margin: 0;
+	padding: 0;
+	border: none;
+	flex: 1;
+}
+
+.filteri-ikona {
+	font-size: 1.2rem;
+}
+
+.reset-btn {
+	background: transparent;
+	color: var(--boja-tekst-svijetli);
+	border: 1.5px solid #ddd;
+	border-radius: 20px;
+	padding: 5px 14px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	cursor: pointer;
+	width: auto;
+	transition: var(--transition);
+	white-space: nowrap;
+}
+
+.reset-btn:hover {
+	background: #ffeef2;
+	border-color: var(--boja-akcent);
+	color: var(--boja-akcent);
+	transform: none;
+}
+
+/* Grid redak filtara */
+.filteri-redak {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1.4fr 1.6fr;
+	gap: 18px;
+	align-items: start;
+}
+
+.filter-grupa {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.filter-label {
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var(--boja-tekst-svijetli);
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.filter-ikona {
+	font-size: 1rem;
+}
+
+/* Select */
+.filter-select {
+	width: 100%;
+	padding: 9px 12px;
+	border: 2px solid #e0e0e0;
+	border-radius: var(--border-radius);
+	font-size: 0.9rem;
+	font-family: var(--font-tijelo);
+	background: #fafafa;
+	color: var(--boja-tekst);
+	cursor: pointer;
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	padding-right: 32px;
+}
+
+.filter-select:focus {
+	outline: none;
+	border-color: var(--boja-akcent);
+	box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.12);
+	background-color: #fff;
+}
+
+/* BPM number inputs */
+.bpm-inputs {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.filter-number {
+	width: 0;
+	flex: 1;
+	padding: 9px 10px;
+	border: 2px solid #e0e0e0;
+	border-radius: var(--border-radius);
+	font-size: 0.9rem;
+	font-family: var(--font-tijelo);
+	background: #fafafa;
+	color: var(--boja-tekst);
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
+	-moz-appearance: textfield;
+}
+
+.filter-number::-webkit-inner-spin-button,
+.filter-number::-webkit-outer-spin-button {
+	opacity: 0.5;
+}
+
+.filter-number:focus {
+	outline: none;
+	border-color: var(--boja-akcent);
+	box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.12);
+	background: #fff;
+}
+
+.bpm-separator {
+	color: #bbb;
+	font-weight: bold;
+	flex-shrink: 0;
+}
+
+/* Godina range slider */
+.filter-godina-grupa .filter-label {
+	justify-content: space-between;
+}
+
+.godina-prikaz {
+	font-weight: 700;
+	color: var(--boja-akcent);
+	font-size: 0.85rem;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.range-wrapper {
+	position: relative;
+	height: 36px;
+	display: flex;
+	align-items: center;
+}
+
+.range-track {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 5px;
+	background: #e0e0e0;
+	border-radius: 3px;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.range-fill {
+	position: absolute;
+	height: 100%;
+	background: linear-gradient(90deg, var(--boja-akcent), var(--boja-akcent-svijetla));
+	border-radius: 3px;
+}
+
+.filter-range {
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 5px;
+	background: transparent;
+	-webkit-appearance: none;
+	appearance: none;
+	pointer-events: none;
+	z-index: 2;
+}
+
+.filter-range::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--boja-bijela);
+	border: 2.5px solid var(--boja-akcent);
+	cursor: pointer;
+	pointer-events: all;
+	box-shadow: 0 2px 6px rgba(233,69,96,0.25);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-range::-webkit-slider-thumb:hover,
+.filter-range::-webkit-slider-thumb:active {
+	transform: scale(1.25);
+	box-shadow: 0 3px 10px rgba(233,69,96,0.4);
+}
+
+.filter-range::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--boja-bijela);
+	border: 2.5px solid var(--boja-akcent);
+	cursor: pointer;
+	pointer-events: all;
+	box-shadow: 0 2px 6px rgba(233,69,96,0.25);
+}
+
+.range-labele {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.72rem;
+	color: #aaa;
+	margin-top: 2px;
+}
+
+/* Raspoloženje checkbox tagovi */
+.raspolozenje-tagovi {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.raspolozenje-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 5px 11px;
+	border: 1.5px solid #ddd;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	cursor: pointer;
+	background: #f8f8fc;
+	color: var(--boja-tekst-svijetli);
+	transition: all 0.2s ease;
+	user-select: none;
+	white-space: nowrap;
+}
+
+.raspolozenje-tag input[type="checkbox"] {
+	display: none;
+}
+
+.raspolozenje-tag:hover {
+	border-color: var(--boja-akcent);
+	color: var(--boja-akcent);
+	background: #fff0f3;
+}
+
+.raspolozenje-tag.aktivan {
+	background: var(--boja-akcent);
+	border-color: var(--boja-akcent);
+	color: #fff;
+	box-shadow: 0 2px 8px rgba(233,69,96,0.3);
+}
+
+/* Status bar */
+.filteri-status {
+	margin-top: 14px;
+	padding-top: 10px;
+	border-top: 1px solid #f0f0f5;
+	text-align: right;
+}
+
+.rezultati-broj {
+	font-size: 0.82rem;
+	color: var(--boja-tekst-svijetli);
+	font-weight: 600;
+}
+
+.rezultati-broj.filtrirano {
+	color: var(--boja-akcent);
+}
+
+/* Poruka kad nema rezultata */
+.nema-rezultata {
+	text-align: center;
+	padding: 30px !important;
+	color: var(--boja-tekst-svijetli);
+	font-size: 1rem;
+	font-style: italic;
+}
+
+/* ── Responzivnost filtara ── */
+@media (max-width: 1024px) {
+	.filteri-redak {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 600px) {
+	.filteri-redak {
+		grid-template-columns: 1fr;
+	}
+	.filteri-wrapper {
+		padding: 16px;
+	}
+}
+
+/* ============================================================
+   PLAYLISTA - Zadatak 3
+   ============================================================ */
+
+.playlist-sekcija {
+	max-width: 1200px;
+	margin: 0 auto 20px;
+}
+
+.playlist-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 18px;
+}
+
+.playlist-header h2 {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.playlist-broj-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 22px;
+	height: 22px;
+	padding: 0 6px;
+	background: var(--boja-akcent);
+	color: #fff;
+	border-radius: 11px;
+	font-size: 0.78rem;
+	font-family: var(--font-tijelo);
+	font-weight: 700;
+}
+
+/* Gumb za potvrdu - prati stil gallery-btn */
+.potvrdi-btn {
+	padding: 10px 22px;
+	background-color: var(--boja-akcent);
+	color: var(--boja-bijela);
+	border: none;
+	border-radius: 30px;
+	font-weight: bold;
+	font-size: 0.9rem;
+	cursor: pointer;
+	width: auto;
+	transition: var(--transition);
+	box-shadow: 0 4px 10px rgba(233, 69, 96, 0.3);
+}
+
+.potvrdi-btn:hover:not(:disabled) {
+	background-color: var(--boja-akcent-svijetla);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
+}
+
+.potvrdi-btn:disabled {
+	background-color: #ccc;
+	box-shadow: none;
+	cursor: not-allowed;
+	transform: none;
+}
+
+/* Prazan state */
+.playlist-prazan {
+	padding: 24px;
+	text-align: center;
+	background: var(--boja-tablica-parni);
+	border-radius: var(--border-radius);
+	color: var(--boja-tekst-svijetli);
+	font-size: 0.95rem;
+	border: 2px dashed #e0e0e0;
+}
+
+/* Playlist tablica - koristi isti stil kao glavna tablica */
+.playlist-tablica {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9rem;
+}
+
+.playlist-tablica thead tr {
+	background: var(--boja-tablica-zaglavlje);
+	color: var(--boja-bijela);
+}
+
+.playlist-tablica th {
+	padding: 10px 15px;
+	text-align: left;
+	font-weight: bold;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+}
+
+.playlist-tablica td {
+	padding: 10px 15px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.playlist-tablica tbody tr:nth-child(even) {
+	background-color: var(--boja-tablica-parni);
+}
+
+.playlist-tablica tbody tr {
+	transition: var(--transition);
+}
+
+.playlist-tablica tbody tr:hover {
+	background-color: var(--boja-tablica-hover);
+}
+
+/* Gumb za dodavanje u tablici */
+.dodaj-btn {
+	padding: 5px 13px;
+	background-color: var(--boja-akcent);
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: 700;
+	cursor: pointer;
+	width: auto;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+	white-space: nowrap;
+}
+
+.dodaj-btn:hover:not(:disabled) {
+	background-color: var(--boja-akcent-svijetla);
+	transform: translateY(-1px);
+}
+
+.dodaj-btn.dodano,
+.dodaj-btn:disabled {
+	background-color: #c8c8d0;
+	color: #888;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+/* Gumb za uklanjanje iz playliste */
+.ukloni-btn {
+	padding: 4px 11px;
+	background: transparent;
+	color: var(--boja-tekst-svijetli);
+	border: 1.5px solid #ddd;
+	border-radius: 20px;
+	font-size: 0.78rem;
+	font-weight: 600;
+	cursor: pointer;
+	width: auto;
+	transition: var(--transition);
+	white-space: nowrap;
+}
+
+.ukloni-btn:hover {
+	background: #ffeef2;
+	border-color: var(--boja-akcent);
+	color: var(--boja-akcent);
+	transform: none;
+}
+
+/* Poruka o uspješnom spremanju */
+.playlist-poruka {
+	margin-top: 14px;
+	padding: 12px 18px;
+	background: #edfaf3;
+	color: #1a7a4a;
+	border: 1.5px solid #a8e6c6;
+	border-radius: var(--border-radius);
+	font-weight: 600;
+	font-size: 0.95rem;
+	animation: fadeInUp 0.3s ease;
+}
