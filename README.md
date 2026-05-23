@@ -1,6 +1,6 @@
 # LV 1 zadatak - Web stranica na danu temu
 
-### LINK: [(lv4-web.page.gd//)](lv4-web.page.gd/)
+### LINK: [(lv4-web.page.gd/)](https://lv4-web.page.gd/)
 
 <hr />
 
