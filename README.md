@@ -1,7 +1,6 @@
-[![Open in Visual Studio Code](lv4-web.page.gd/)
 # LV 1 zadatak - Web stranica na danu temu
 
-### LINK: [(https://lv1-web-production.up.railway.app/)](https://lv1-web-production.up.railway.app/)
+### LINK: [(lv4-web.page.gd//)](lv4-web.page.gd/)
 
 <hr />
 
