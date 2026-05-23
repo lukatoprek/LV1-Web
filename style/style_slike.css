@@ -1,0 +1,371 @@
+/* ============================================================
+   style_slike.css — Galerija slika s ocjenjivanjem
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+/* ============================================================
+   GRID GALERIJE  — 3 stupca fiksna
+   ============================================================ */
+.galerija-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 22px;
+	width: 92%;
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 24px 0 48px;
+}
+
+/* ============================================================
+   KARTICA
+   ============================================================ */
+.slika-kartica {
+	display: flex;
+	flex-direction: column;
+	border-radius: 12px;
+	background: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
+	overflow: hidden;
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.slika-kartica:hover {
+	box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
+	transform: translateY(-4px);
+}
+
+/* Image link — no overlay, no emoji */
+.slika-link {
+	display: block;
+	overflow: hidden;
+	cursor: zoom-in;
+	text-decoration: none;
+	line-height: 0;
+}
+
+.slika-link img {
+	width: 100%;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.slika-kartica:hover .slika-link img {
+	transform: scale(1.06);
+	filter: brightness(0.8);
+}
+
+/* Card body */
+.kartica-tijelo {
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+}
+
+/* ============================================================
+   PROSJECNA OCJENA  — Google / TrustPilot style
+   ============================================================ */
+.avg-blok {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* Large score number */
+.avg-score {
+	font-size: 1.9rem;
+	font-weight: 800;
+	color: #1a1a2e;
+	line-height: 1;
+	min-width: 2.6ch;
+}
+
+.avg-score--prazna {
+	color: #ccc;
+	font-weight: 300;
+}
+
+.avg-detalji {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.avg-zvjezdice-red {
+	display: flex;
+	gap: 1px;
+	line-height: 1;
+}
+
+/* Explicit colors — no inheritance from body */
+.avg-zvjezdica {
+	font-size: 1rem;
+}
+
+.avg-puna  { color: #f5c518; }
+.avg-prazna { color: #d8d8d8; }
+
+.avg-count {
+	font-size: 0.73rem;
+	color: #aaa;
+	line-height: 1;
+}
+
+/* Thin separator */
+.ocjena-separator {
+	border: none;
+	border-top: 1px solid #f0f0f5;
+	margin: 0;
+}
+
+/* ============================================================
+   KORISNICKA OCJENA
+   ============================================================ */
+.korisnicki-red {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.ocjena-label {
+	font-size: 0.75rem;
+	color: #bbb;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.ocjena-forma {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+/* Stars container — plain row, 1 on left, 5 on right */
+.zvjezdice {
+	display: flex;
+	flex-direction: row;
+	gap: 1px;
+	line-height: 1;
+}
+
+/* Individual star span */
+.zvjezdica {
+	font-size: 1.6rem;
+	color: #d8d8d8;   /* explicit gray — no inheritance */
+	cursor: pointer;
+	line-height: 1;
+	transition: color 0.07s ease, transform 0.07s ease;
+	user-select: none;
+}
+
+.zvjezdica:hover {
+	transform: scale(1.18);
+}
+
+/* JS sets this class for selected/hovered stars */
+.zvjezdica.aktivan {
+	color: #f5c518;
+}
+
+/* No-JS submit button (hidden by JS when JS loads) */
+.ocjeni-btn {
+	display: inline-block;
+	background: none;
+	border: 1.5px solid #ddd;
+	border-radius: 20px;
+	padding: 3px 11px;
+	font-size: 0.74rem;
+	font-weight: 600;
+	color: #666;
+	cursor: pointer;
+	transition: border-color 0.2s, color 0.2s;
+	white-space: nowrap;
+	width: auto;
+}
+
+.ocjeni-btn:hover {
+	border-color: #e94560;
+	color: #e94560;
+	background: none;
+	transform: none;
+}
+
+.prijava-napomena {
+	font-size: 0.78rem;
+	color: #bbb;
+	margin: 0;
+}
+
+.prijava-napomena a {
+	color: #e94560;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.prijava-napomena a:hover {
+	text-decoration: underline;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.galerija-toast {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 9999;
+	padding: 12px 18px;
+	border-radius: 8px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+	animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+	max-width: 320px;
+}
+
+.galerija-toast--fade-out {
+	animation: toastOut 0.35s ease forwards;
+}
+
+.galerija-toast--uspjeh {
+	background: #edfaf3;
+	color: #1a7a4a;
+	border-left: 4px solid #2ecc71;
+}
+
+.galerija-toast--greska {
+	background: #fff0f3;
+	color: #c0392b;
+	border-left: 4px solid #e94560;
+}
+
+@keyframes toastIn {
+	from { opacity: 0; transform: translateX(50px); }
+	to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastOut {
+	from { opacity: 1; transform: translateX(0); }
+	to   { opacity: 0; transform: translateX(50px); }
+}
+
+/* ============================================================
+   LIGHTBOX  — CSS-only, unchanged
+   ============================================================ */
+.lightbox {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.92);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 15px;
+	padding: 20px;
+	box-sizing: border-box;
+	animation: lbIn 0.3s ease forwards;
+}
+
+.lightbox:target { display: flex; }
+
+@keyframes lbIn {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+.lightbox img {
+	max-width: 90%;
+	max-height: 80vh;
+	border-radius: 8px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+	object-fit: contain;
+	animation: lbZoom 0.3s ease forwards;
+}
+
+@keyframes lbZoom {
+	from { transform: scale(0.85); opacity: 0; }
+	to   { transform: scale(1);    opacity: 1; }
+}
+
+.lightbox-naslov {
+	color: #fff;
+	font-size: 1.1rem;
+	text-align: center;
+	margin: 0;
+	letter-spacing: 1px;
+}
+
+.lightbox-zatvori {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: #fff;
+	font-size: 2.5rem;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	transition: color 0.2s, transform 0.2s;
+	z-index: 1001;
+}
+
+.lightbox-zatvori:hover {
+	color: #e94560;
+	transform: scale(1.2) rotate(90deg);
+}
+
+/* ============================================================
+   HEADINGS / DESCRIPTION
+   ============================================================ */
+.galerija h1 {
+	color: #1a1a2e;
+	font-size: 2rem;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.galerija-opis {
+	text-align: center;
+	color: #888;
+	font-size: 0.95rem;
+	margin-bottom: 6px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 960px) {
+	.galerija-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 580px) {
+	.galerija-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.galerija h1 { font-size: 1.5rem; }
+
+	.lightbox img {
+		max-width: 95%;
+		max-height: 70vh;
+	}
+
+	.lightbox-zatvori {
+		top: 10px;
+		right: 15px;
+		font-size: 2rem;
+	}
+
+	.galerija-toast {
+		top: auto;
+		bottom: 16px;
+		right: 12px;
+		left: 12px;
+		max-width: unset;
+	}
+}
