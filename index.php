@@ -104,8 +104,7 @@ include 'includes/header.php';
                         <label for="filter-zanr" class="filter-label">
                             <span class="filter-ikona">&#127925;</span> &#381;anr
                         </label>
-                        <select id="filter-zanr" name="zanr" class="filter-select"
-                                onchange="this.form.submit()">
+                        <select id="filter-zanr" name="zanr" class="filter-select">
                             <option value="">Svi &#382;anrovi</option>
                             <?php foreach ($zanrovi as $z): ?>
                                 <option value="<?= htmlspecialchars($z) ?>"
@@ -124,13 +123,11 @@ include 'includes/header.php';
                         <div class="bpm-inputs">
                             <input type="number" name="bpm_min" id="filter-bpm-min" class="filter-number"
                                    placeholder="Min" min="0" max="300"
-                                   value="<?= $filterBpmMin > 0 ? $filterBpmMin : '' ?>"
-                                   onchange="this.form.submit()">
+                                   value="<?= $filterBpmMin > 0 ? $filterBpmMin : '' ?>">
                             <span class="bpm-separator">&#8212;</span>
                             <input type="number" name="bpm_max" id="filter-bpm-max" class="filter-number"
                                    placeholder="Max" min="0" max="300"
-                                   value="<?= $filterBpmMax > 0 ? $filterBpmMax : '' ?>"
-                                   onchange="this.form.submit()">
+                                   value="<?= $filterBpmMax > 0 ? $filterBpmMax : '' ?>">
                         </div>
                     </div>
 
@@ -173,7 +170,7 @@ include 'includes/header.php';
                                     <input type="checkbox" name="raspolozenje[]"
                                            value="<?= htmlspecialchars($r) ?>"
                                            <?= $aktivan ? 'checked' : '' ?>
-                                           onchange="this.form.submit()">
+                                           >
                                     <span><?= htmlspecialchars($r) ?></span>
                                 </label>
                             <?php endforeach; ?>
@@ -312,10 +309,13 @@ include 'includes/header.php';
         if (parseFloat(this.value) < parseFloat(rangeOd.value)) this.value = rangeOd.value;
         updateFill();
     });
-    rangeOd.addEventListener('change', function () { form.submit(); });
-    rangeDo.addEventListener('change', function () { form.submit(); });
-
     updateFill();
+
+    document.querySelectorAll('.raspolozenje-tagovi input[type="checkbox"]').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+            this.closest('label').classList.toggle('aktivan', this.checked);
+        });
+    });
 })();
 </script>
 
