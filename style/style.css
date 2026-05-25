@@ -101,7 +101,7 @@ nav {
 }
 
 /* Prikaži navigaciju kad je checkbox checked */
-.nav-toggle-checkbox:checked ~ .nav-menu {
+.nav-toggle-checkbox:checked~.nav-menu {
 	max-height: 300px;
 }
 
@@ -173,7 +173,8 @@ nav:hover .nav-menu {
    TABLICA
    ============================================================ */
 .table-wrapper {
-	overflow-x: auto; /* Responzivnost tablice na malim ekranima */
+	overflow-x: auto;
+	/* Responzivnost tablice na malim ekranima */
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -249,14 +250,16 @@ tbody tr:hover {
 	border-radius: var(--border-radius);
 	margin-bottom: 12px;
 	display: block;
-	opacity: 0.85; /* Prozirnost slike */
+	opacity: 0.85;
+	/* Prozirnost slike */
 	transition: opacity 0.3s ease, transform 0.3s ease;
 	object-fit: cover;
 }
 
 .aside-img:hover {
 	opacity: 1;
-	transform: scale(1.03); /* Povećanje slike prelaskom miša */
+	transform: scale(1.03);
+	/* Povećanje slike prelaskom miša */
 }
 
 /* Stilizirani gumb bez JavaScripta */
@@ -327,11 +330,9 @@ tbody tr:hover {
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
-	background: conic-gradient(
-		var(--boja-akcent) 0% 40%,
-		#3498db 40% 75%,
-		#2ecc71 75% 100%
-	);
+	background: conic-gradient(var(--boja-akcent) 0% 40%,
+			#3498db 40% 75%,
+			#2ecc71 75% 100%);
 	margin: 0 auto;
 	transition: transform 0.3s ease;
 }
@@ -421,6 +422,7 @@ footer {
 		opacity: 0;
 		transform: translateY(20px);
 	}
+
 	to {
 		opacity: 1;
 		transform: translateY(0);
@@ -471,7 +473,8 @@ header {
 	.aside-gallery {
 		width: 100%;
 		min-width: unset;
-		order: 2; /* Aside dolazi nakon glavnog sadržaja */
+		order: 2;
+		/* Aside dolazi nakon glavnog sadržaja */
 	}
 
 	.content {
@@ -492,7 +495,8 @@ header {
 		font-size: 0.8rem;
 	}
 
-	th, td {
+	th,
+	td {
 		padding: 8px 10px;
 	}
 
@@ -630,10 +634,18 @@ header {
 	cursor: pointer;
 	transition: border-color 0.25s ease, box-shadow 0.25s ease;
 	appearance: none;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right 12px center;
 	padding-right: 32px;
+}
+
+select.filter-select {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+input[type="text"].filter-select {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' stroke='%23999' stroke-width='2' fill='none'/%3E%3Cpath d='m16 16 4 4' stroke='%23999' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+	cursor: text;
 }
 
 .filter-select:focus {
@@ -744,14 +756,14 @@ header {
 	border: 2.5px solid var(--boja-akcent);
 	cursor: pointer;
 	pointer-events: all;
-	box-shadow: 0 2px 6px rgba(233,69,96,0.25);
+	box-shadow: 0 2px 6px rgba(233, 69, 96, 0.25);
 	transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .filter-range::-webkit-slider-thumb:hover,
 .filter-range::-webkit-slider-thumb:active {
 	transform: scale(1.25);
-	box-shadow: 0 3px 10px rgba(233,69,96,0.4);
+	box-shadow: 0 3px 10px rgba(233, 69, 96, 0.4);
 }
 
 .filter-range::-moz-range-thumb {
@@ -762,7 +774,7 @@ header {
 	border: 2.5px solid var(--boja-akcent);
 	cursor: pointer;
 	pointer-events: all;
-	box-shadow: 0 2px 6px rgba(233,69,96,0.25);
+	box-shadow: 0 2px 6px rgba(233, 69, 96, 0.25);
 }
 
 .range-labele {
@@ -811,7 +823,7 @@ header {
 	background: var(--boja-akcent);
 	border-color: var(--boja-akcent);
 	color: #fff;
-	box-shadow: 0 2px 8px rgba(233,69,96,0.3);
+	box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
 }
 
 /* Status bar */
